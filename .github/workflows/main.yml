@@ -43,7 +43,7 @@ jobs:
            scripts/config -e LTO_CLANG_THIN
        
       - name: Build and package kernel
-        run: LLVM=1 LLVM_IAS=1 make deb-pkg -j$(nproc) LOCALVERSION=-custom
+        run: LLVM=1 LLVM_IAS=1 make bindeb-pkg -j$(nproc) LOCALVERSION=-custom
         
       - name: List files in important directories to check artifacts
         run: |
