@@ -1,0 +1,32 @@
+name: Clang/LLVM WSL2 Kernel Build
+
+on:
+  push:
+    branches: [ linux-msft-wsl-5.10.y ]
+  pull_request:
+    branches: [ linux-msft-wsl-5.10.y ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Install build tools
+        run: |
+           sudo apt install build-essential flex bison libelf-dev libssl-dev binutils binutils-i686-gnu binutils-i686-linux-gnu \
+           binutils-x86-64-linux-gnu binutils-x86-64-linux-gnux32 -y
+      
+      - name: Install Clang/LLVM repositories and base tools
+        run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+        
+      - name: Install the full Clang/LLVM toolchain
+        run: |
+           sudo apt install libllvm-13-ocaml-dev libllvm13 llvm-13 llvm-13-dev llvm-13-runtime clang-13 clang-tools-13 clang-13-doc \
+           libclang-common-13-dev libclang-13-dev libclang1-13 clang-format-13 clangd-13 libfuzzer-13-dev lldb-13 lld-13 libc++-13-dev \
+           libc++abi-13-dev libomp-13-dev libclc-13-dev libunwind-13-dev -y
+
+      # Runs a set of commands using the runners shell
+      - name: Setup the Clang/LLVM toolchain symlinks
+        run: sudo bash -c "$(wget -O - https://gist.githubusercontent.com/alexandreteles/3006c6c1b64d1a85685d8b0aab3518e5/raw/4e9bb5a4ba465a823a4c007947b6d14dd3cb63b1/update-alternatives-clang.sh) 13 100"
