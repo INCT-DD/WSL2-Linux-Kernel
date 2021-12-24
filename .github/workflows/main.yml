@@ -29,4 +29,23 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Setup the Clang/LLVM toolchain symlinks
-        run: sudo bash -c "$(wget -O - https://gist.githubusercontent.com/alexandreteles/3006c6c1b64d1a85685d8b0aab3518e5/raw/4e9bb5a4ba465a823a4c007947b6d14dd3cb63b1/update-alternatives-clang.sh) 13 100"
+        run: sudo bash -c "$(wget -O - https://gist.githubusercontent.com/alexandreteles/3006c6c1b64d1a85685d8b0aab3518e5/raw/770350d527dd880bcfe7574e1aa57ebc590af65b/update-alternatives-clang.sh) 13 100"
+        
+      - name: Copy default kernel build configuration
+        run: cp Microsoft/config-wsl .config
+        
+      - name: Run kernel build preparations
+        run: make prepare modules_prepare
+        
+      - name: Enable Clang/LLVM LTO build
+        run: |
+           make LLVM=1 LLVM_IAS=1 defconfig
+           scripts/config -e LTO_CLANG_THIN
+       
+      - name: Build and package kernel
+        run: LLVM=1 LLVM_IAS=1 make deb-pkg
+        
+      - name: List files in important directories to check artifacts
+        run: |
+           ls ./ -la
+           ls arch/x86/boot/bzImage -la
