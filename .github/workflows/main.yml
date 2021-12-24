@@ -1,4 +1,4 @@
-name: Clang/LLVM WSL2 Kernel Build
+name: Clang/LLVM WSL2-Linux-Kernel Build
 
 on:
   push:
@@ -27,7 +27,6 @@ jobs:
            libclang-common-13-dev libclang-13-dev libclang1-13 clang-format-13 clangd-13 libfuzzer-13-dev lldb-13 lld-13 libc++-13-dev \
            libc++abi-13-dev libomp-13-dev libclc-13-dev libunwind-13-dev -y
 
-      # Runs a set of commands using the runners shell
       - name: Setup the Clang/LLVM toolchain symlinks
         run: sudo bash ./update-alternatives-clang.sh 13 100
         
@@ -44,8 +43,22 @@ jobs:
        
       - name: Build and package kernel
         run: LLVM=1 LLVM_IAS=1 make bindeb-pkg -j$(nproc) LOCALVERSION=-custom
-        
-      - name: List files in important directories to check artifacts
-        run: |
-           ls ./ -la
-           ls arch/x86/boot/bzImage -la
+      
+      - name: Upload vmlinux artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: vmlinux
+          path: vmlinux
+          
+      - name: Upload bzImage artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: bzImage
+          path: arch/x86/boot/bzImage
+          
+      - name: Upload debian packages
+        uses: actions/upload-artifact@v2
+        with:
+          name: debian_packages
+          path: debian/
+            
