@@ -36,8 +36,7 @@ function register_clang_version {
         --slave   /usr/bin/clang-cpp             clang-cpp             /usr/bin/clang-cpp-${version} \
         --slave   /usr/bin/clang-check           clang-check           /usr/bin/clang-check-${version} \
         --slave   /usr/bin/clang-cl              clang-cl              /usr/bin/clang-cl-${version} \
-        --slave   /usr/bin/lld-link		 lld-lin               /usr/bin/lld-link-${version} \
-        --slave   /usr/bin/clang-format          clang-format          /usr/bin/clang-format-${version} \
+        --slave   /usr/bin/lld-link		         lld-lin               /usr/bin/lld-link-${version} \
         --slave   /usr/bin/clang-format-diff     clang-format-diff     /usr/bin/clang-format-diff-${version} \
         --slave   /usr/bin/clang-include-fixer   clang-include-fixer   /usr/bin/clang-include-fixer-${version} \
         --slave   /usr/bin/clang-offload-bundler clang-offload-bundler /usr/bin/clang-offload-bundler-${version} \
@@ -61,6 +60,10 @@ function register_clang_version {
     update-alternatives \
         --verbose \
         --install /usr/bin/lldb                  lldb                  /usr/bin/lldb-${version} ${priority}
+        
+    update-alternatives \
+        --verbose \
+        --install /usr/bin/clang-format          clang-format          /usr/bin/clang-format-${version} ${priority}
 }
 
 register_clang_version $1 $2
