@@ -36,6 +36,10 @@ jobs:
       - name: Run kernel build preparations
         run: make prepare modules_prepare
         
+      - name: Fix license information on include/uapi/misc/d3dkmthk.h
+        run: |
+           sed -i 's/SPDX-License-Identifier: GPL-2.0/SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note/g' include/uapi/misc/d3dkmthk.h
+        
       - name: Enable Clang/LLVM LTO build
         run: |
            make LLVM=1 LLVM_IAS=1 defconfig
