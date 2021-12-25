@@ -70,5 +70,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: debian_packages
-          path: debian/
+          path: |
+             ../*.deb
+             ./*.deb
             
