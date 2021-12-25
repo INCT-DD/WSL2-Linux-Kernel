@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CFLAGS: -O3 -mllvm -polly -mllvm -polly-run-inliner -mllvm -polly-opt-fusion=max -mllvm -polly-omp-backend=LLVM -mllvm -polly-scheduling=dynamic -mllvm -polly-scheduling-chunksize=1 -mllvm -polly-opt-maximize-bands=yes -mllvm -polly-ast-detect-parallel -mllvm -polly-ast-use-context -mllvm -polly-opt-simplify-deps=no -mllvm -polly-rtc-max-arrays-per-group=40 -mllvm -polly-parallel -ffast-math -pipe -fPIE --param=ssp-buffer-size=32 -D_FORTIFY_SOURCE=2 -D_REENTRANT -fassociative-math -fasynchronous-unwind-tables -feliminate-unused-debug-types -Wformat-security -fno-semantic-interposition -fno-signed-zeros -fno-strict-aliasing -fno-trapping-math -m64 -pthread -Wformat-security -fno-stack-protector -fwrapv -funroll-loops -ftree-vectorize -fforce-addr
-      LOCALVERSION: -custom
+      LOCALVERSION: -clang13
     steps:
       - uses: actions/checkout@v2
       
