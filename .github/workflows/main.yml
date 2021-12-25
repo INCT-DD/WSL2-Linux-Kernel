@@ -44,9 +44,7 @@ jobs:
            sed -i 's/SPDX-License-Identifier: GPL-2.0/SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note/g' include/uapi/misc/d3dkmthk.h
         
       - name: Enable Clang/LLVM LTO build
-        run: |
-           make LLVM=1 LLVM_IAS=1 defconfig
-           scripts/config -e LTO_CLANG_THIN
+        run: scripts/config -e LTO_CLANG_THIN
        
       - name: Build and package kernel
         run: |
