@@ -50,11 +50,8 @@ jobs:
         run: |
            echo "Building with the following compiler arguments: $CFLAGS"
            echo "Current localversion tag: $LOCALVERSION"
-           LLVM=1 LLVM_IAS=1 CFLAGS=$CFLAGS LOCALVERSION=$LOCALVERSION make bindeb-pkg -j$(nproc)
-           
-      - name: Copy .deb packages to the current directory
-        run: cp ../*.deb ./
-      
+           LLVM=1 LLVM_IAS=1 CFLAGS=$CFLAGS LOCALVERSION=$LOCALVERSION make KCONFIG_CONFIG=Microsoft/config-wsl -j$(nproc)
+     
       - name: Upload vmlinux artifact
         uses: actions/upload-artifact@v2
         with:
@@ -66,10 +63,4 @@ jobs:
         with:
           name: bzImage
           path: arch/x86/boot/bzImage
-          
-      - name: Upload debian packages
-        uses: actions/upload-artifact@v2
-        with:
-          name: debian_packages
-          path: ${{ github.workspace }}/*.deb
           
