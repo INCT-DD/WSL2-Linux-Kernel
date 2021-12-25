@@ -19,7 +19,7 @@ jobs:
       - name: Install build tools
         run: |
            sudo apt install build-essential flex bison libelf-dev libssl-dev binutils binutils-i686-gnu binutils-i686-linux-gnu \
-           binutils-x86-64-linux-gnu binutils-x86-64-linux-gnux32 -y
+           binutils-x86-64-linux-gnu binutils-x86-64-linux-gnux32 dwarves -y
       
       - name: Install Clang/LLVM repositories and base tools
         run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
