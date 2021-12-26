@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
         ref:
-          description: "Ref to build the release"
+          description: "Tag to build the release"
           required: true
           default: ''
 
@@ -71,6 +71,7 @@ jobs:
       - name: Generate GitHub release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ github.event.inputs.ref }}
           files: |
             vmlinux
             bzImage
