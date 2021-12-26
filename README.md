@@ -1,3 +1,5 @@
+[![Clang/LLVM WSL2-Linux-Kernel Build](https://github.com/INCT-DD/WSL2-Linux-Kernel-clang/actions/workflows/5.10-clang.yml/badge.svg?branch=linux-msft-wsl-5.10.y.clang)](https://github.com/INCT-DD/WSL2-Linux-Kernel-clang/actions/workflows/5.10-clang.yml)
+
 # Introduction
 
 This repository contains a slightly different version of the standard WSL2 Kernel,
