@@ -33,6 +33,9 @@ jobs:
 
       - name: Setup the Clang/LLVM toolchain symlinks
         run: sudo bash scripts/update-alternatives-clang.sh 13 100
+
+      - name: Copy default kernel build configuration
+        run: cp Microsoft/config-wsl .config
         
       - name: Run kernel build preparations
         run: make prepare modules_prepare
