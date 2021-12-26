@@ -34,7 +34,8 @@ We'll work on documenting the process directly in the `.yml` files, but for now 
 
 We plan on offering an install script in the future to automatically download and configure
 our kernel builds for you, but for now please see the documentation on the 
-[.wslconfig configuration file][install-inst] for information on using a custom built kernel.
+[.wslconfig configuration file][install-inst] for information on using a custom built kernel and
+check our [wiki][wiki] for our own installation instructions.
 
 [install-inst]: https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig
 [wiki]: https://github.com/INCT-DD/WSL2-Linux-Kernel-clang/wiki
