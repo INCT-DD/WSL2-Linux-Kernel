@@ -1,17 +1,15 @@
 # Introduction
 
-This repository contains a slightly different version of the standard WSL2 Kernel.
-Our version is compiled with Clang/LLVM using LTO/Polly optimizations, as well as
-including the necessary kernel changes to properly run AppArmor and Snaps.
+This repository contains a slightly different version of the standard WSL2 Kernel,
+compiled with Clang/LLVM using LTO/Polly optimizations, geared towards data workloads,
+and including the necessary kernel changes to properly run AppArmor and Snaps.
 
-Included modules, kernel configurations and build flags can change at any time, as
-this kernel build is tailored to our specific needs.
-
-One important note is: do not use our build artifacts in production as they are automated
+**Important**: do not use our build artifacts in production as they are automated
 builds used exclusively for debugging purposes. Only our releases are properly tested
-and even those could potentially bring you problems in mission critical deployments.
+and even those could potentially bring you problems in mission critical deployments as
+we only test those kernels for our own purposes. So exercise caution and keep hacking!
 
-Exercise caution and keep hacking!
+For more information, take a look at our [wiki][wiki]
 
 # Reporting Bugs or Requesting Features
 
@@ -21,8 +19,8 @@ directly related to Microsoft's upstream version, we'll relay it for you.
 
 # Feature Requests
 
-Even if our build is very (very) workload specific, you can still ask us to include
-features using our issue tracker we'll consider the possibility of including it. Please
+Even if our build is very workload specific, you can still ask us to include
+features using our issue tracker and we'll consider the possibility of including it. Please
 note that inclusions aren't guaranteed, but we'll do our best to accommodate other needs
 as we go.
 
@@ -39,4 +37,4 @@ our kernel builds for you, but for now please see the documentation on the
 [.wslconfig configuration file][install-inst] for information on using a custom built kernel.
 
 [install-inst]: https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig
-
+[wiki]: https://github.com/INCT-DD/WSL2-Linux-Kernel-clang/wiki
