@@ -44,10 +44,7 @@ jobs:
 
       - name: Copy default kernel build configuration
         run: cp $DEFCONFIG .config
-        
-      - name: Run kernel/modules build preparations
-        run: make prepare modules_prepare
-        
+      
       - name: Fix license information on include/uapi/misc/d3dkmthk.h
         run: |
            sed -i 's/SPDX-License-Identifier: GPL-2.0/SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note/g' include/uapi/misc/d3dkmthk.h
