@@ -1,46 +1,42 @@
 # Introduction
 
-The [WSL2-Linux-Kernel][wsl2-kernel] repo contains the kernel source code and
-configuration files for the [WSL2][about-wsl2] kernel.
+This repository contains a slightly different version of the standard WSL2 Kernel.
+Our version is compiled with Clang/LLVM using LTO/Polly optimizations, as well as
+including the necessary kernel changes to properly run AppArmor and Snaps.
 
-# Reporting Bugs
+Included modules, kernel configurations and build flags can change at any time, as
+this kernel build is tailored to our specific needs.
 
-If you discover an issue relating to WSL or the WSL2 kernel, please report it on
-the [WSL GitHub project][wsl-issue]. It is not possible to report issues on the
-[WSL2-Linux-Kernel][wsl2-kernel] project.
+One important note is: do not use our build artifacts in production as they are automated
+builds used exclusively for debugging purposes. Only our releases are properly tested
+and even those could potentially bring you problems in mission critical deployments.
 
-If you're able to determine that the bug is present in the upstream Linux
-kernel, you may want to work directly with the upstream developers. Please note
-that there are separate processes for reporting a [normal bug][normal-bug] and
-a [security bug][security-bug].
+Exercise caution and keep hacking!
+
+# Reporting Bugs or Requesting Features
+
+If you discover an issue relating to our kernel build, please report it using 
+our issue tracker and **DO NOT REPORT IT UPSTREAM**. If we find that the bug is
+directly related to Microsoft's upstream version, we'll relay it for you.
 
 # Feature Requests
 
-Is there a missing feature that you'd like to see? Please request it on the
-[WSL GitHub project][wsl-issue].
-
-If you're able and interested in contributing kernel code for your feature
-request, we encourage you to [submit the change upstream][submit-patch].
+Even if our build is very (very) workload specific, you can still ask us to include
+features using our issue tracker we'll consider the possibility of including it. Please
+note that inclusions aren't guaranteed, but we'll do our best to accommodate other needs
+as we go.
 
 # Build Instructions
 
-Instructions for building an x86_64 WSL2 kernel with an Ubuntu distribution are
-as follows:
-
-1. Install the build dependencies:  
-   `$ sudo apt install build-essential flex bison libssl-dev libelf-dev`
-2. Build the kernel using the WSL2 kernel configuration:  
-   `$ make KCONFIG_CONFIG=Microsoft/config-wsl`
+Please refer to `.github/workflows/` as our builds are automated using GitHub Actions.
+We'll work on documenting the process directly in the `.yml` files, but for now the code
+**is** the documentation.
 
 # Install Instructions
 
-Please see the documentation on the [.wslconfig configuration
-file][install-inst] for information on using a custom built kernel.
+We plan on offering an install script in the future to automatically download and configure
+our kernel builds for you, but for now please see the documentation on the 
+[.wslconfig configuration file][install-inst] for information on using a custom built kernel.
 
-[wsl2-kernel]:  https://github.com/microsoft/WSL2-Linux-Kernel
-[about-wsl2]:   https://docs.microsoft.com/en-us/windows/wsl/about#what-is-wsl-2
-[wsl-issue]:    https://github.com/microsoft/WSL/issues/new/choose
-[normal-bug]:   https://www.kernel.org/doc/html/latest/admin-guide/bug-hunting.html#reporting-the-bug
-[security-bug]: https://www.kernel.org/doc/html/latest/admin-guide/security-bugs.html
-[submit-patch]: https://www.kernel.org/doc/html/latest/process/submitting-patches.html
 [install-inst]: https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig
+
