@@ -1,11 +1,12 @@
-name: Clang/LLVM WSL2-Linux-Kernel Build
+name: Clang/LLVM WSL2-Linux-Kernel Build (Release)
 
 on:
-  push:
-    branches: [ linux-msft-wsl-5.10.y.clang ]
-  pull_request:
-    branches: [ linux-msft-wsl-5.10.y.clang ]
   workflow_dispatch:
+    inputs:
+        ref:
+          description: "Ref to build the release"
+          required: true
+          default: ''
 
 jobs:
   build:
@@ -16,6 +17,8 @@ jobs:
       DEFCONFIG: Inct/config-wsl
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.ref }}
       
       - name: Install build tools
         run: |
@@ -64,5 +67,11 @@ jobs:
         with:
           name: bzImage
           path: arch/x86/boot/bzImage
-
+      
+      - name: Generate GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            vmlinux
+            bzImage
           
