@@ -3,6 +3,8 @@ name: Clang/LLVM WSL2-Linux-Kernel Build
 on:
   push:
     branches: [ linux-msft-wsl-5.10.y.clang ]
+    tags:
+      - '*'
   pull_request:
     branches: [ linux-msft-wsl-5.10.y.clang ]
   workflow_dispatch:
@@ -64,4 +66,12 @@ jobs:
         with:
           name: bzImage
           path: arch/x86/boot/bzImage
+      
+      - name: Generate GitHub release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            vmlinux
+            bzImage
           
